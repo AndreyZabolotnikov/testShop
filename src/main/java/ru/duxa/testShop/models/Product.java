@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 @Data
@@ -21,13 +19,14 @@ public class Product {
     private int id;
 
     @Column(name = "type_product")
-    @NotEmpty(message = "Type product should`t be empty")
+    @NotBlank(message = "Type product should`t be empty")
     @Size(min = 2, max = 30, message = "Type product should be between 2 and 30")
     @Pattern(regexp = "[А-ЯЁA-Z]", message = "Type product in uppercase letters")
     private String typeProduct;
 
     @Column(name = "serial")
     @NotEmpty(message = "Serial number should`t be empty")
+    @Positive
     private int serial;
 
     @Column(name = "manufacturer")
